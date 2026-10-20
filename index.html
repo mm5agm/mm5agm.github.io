@@ -1,33 +1,566 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>MM5AGM</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MM5AGM – Amateur Radio Software</title>
+    <meta name="description"
+        content="Yaesu Web Control and Icom Web Control: free, open-source browser-based control for Yaesu and Icom transceivers, by Colin Campbell MM5AGM.">
+
+    <!-- Link previews (Facebook, Discord, groups.io etc.) -->
+    <meta property="og:title" content="MM5AGM – Amateur Radio Software">
+    <meta property="og:description"
+        content="Control your Yaesu or Icom transceiver from any browser. Free and open source.">
+    <meta property="og:image" content="https://mm5agm.co.uk/pictures/Radio_Dark_Console.png">
+    <meta property="og:url" content="https://mm5agm.co.uk/">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #0e1116;
+            --panel: #161b22;
+            --panel-2: #1c222b;
+            --border: #2a313c;
+            --text: #e6e9ee;
+            --muted: #9aa4b2;
+            --amber: #f5a623;
+            --cyan: #4fc3f7;
+            --radius: 12px;
+            --mono: "JetBrains Mono", ui-monospace, Consolas, monospace;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, "Segoe UI", sans-serif;
+            line-height: 1.6;
+        }
+
+        a { color: var(--cyan); }
+
+        img { max-width: 100%; height: auto; display: block; }
+
+        .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+        /* ---------- Header ---------- */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: rgba(14, 17, 22, 0.9);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        header .wrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 60px;
+        }
+
+        .logo {
+            font-family: var(--mono);
+            font-weight: 700;
+            font-size: 1.25rem;
+            letter-spacing: 0.08em;
+            color: var(--text);
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--muted);
+            text-decoration: none;
+            margin-left: 24px;
+            font-weight: 500;
+        }
+
+        nav a:hover { color: var(--text); }
+
+        /* ---------- Hero ---------- */
+        .hero { padding: 80px 0 56px; text-align: center; }
+
+        .eyebrow {
+            font-family: var(--mono);
+            color: var(--amber);
+            letter-spacing: 0.15em;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 5vw, 3.25rem);
+            line-height: 1.15;
+            margin: 12px 0 16px;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 1.15rem;
+            max-width: 680px;
+            margin: 0 auto 32px;
+        }
+
+        .buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 22px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            border: 1px solid var(--border);
+            color: var(--text);
+            background: var(--panel-2);
+        }
+
+        .btn:hover { border-color: var(--muted); }
+
+        .btn.primary { background: var(--amber); border-color: var(--amber); color: #111; }
+
+        .btn.primary:hover { filter: brightness(1.08); }
+
+        /* ---------- Product sections ---------- */
+        section.product {
+            padding: 64px 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .product-head {
+            display: flex;
+            align-items: baseline;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+
+        .product-head h2 { margin: 0; font-size: 2rem; }
+
+        .tag {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            color: var(--amber);
+            border: 1px solid var(--amber);
+            border-radius: 4px;
+            padding: 2px 8px;
+        }
+
+        .lead { color: var(--muted); font-size: 1.1rem; max-width: 760px; }
+
+        .views { margin: 32px 0; }
+
+        .view-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+
+        .view-tabs button {
+            font: 600 0.9rem Inter, system-ui, sans-serif;
+            color: var(--muted);
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 8px 14px;
+            cursor: pointer;
+        }
+
+        .view-tabs button:hover { color: var(--text); }
+
+        .view-tabs button[aria-pressed="true"] {
+            color: #111;
+            background: var(--amber);
+            border-color: var(--amber);
+        }
+
+        .shot {
+            display: block;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin: 24px 0 32px;
+        }
+
+        .card {
+            background: var(--panel);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+        }
+
+        .card h3 { margin: 0 0 6px; font-size: 1.05rem; }
+
+        .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+
+        .specs {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .specs h4 {
+            font-family: var(--mono);
+            font-size: 0.8rem;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin: 0 0 10px;
+        }
+
+        .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+
+        .chip {
+            font-family: var(--mono);
+            font-size: 0.85rem;
+            background: var(--panel-2);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 4px 10px;
+        }
+
+        .note { color: var(--muted); font-size: 0.85rem; margin: 10px 0 0; }
+
+        .badges { display: flex; gap: 8px; flex-wrap: wrap; margin: 12px 0 0; }
+
+        .badges img { display: inline-block; }
+
+        /* ---------- About / footer ---------- */
+        section.about { padding: 64px 0; border-top: 1px solid var(--border); }
+
+        section.about p { max-width: 760px; color: var(--muted); }
+
+        footer {
+            border-top: 1px solid var(--border);
+            padding: 28px 0;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        footer .wrap { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+        @media (max-width: 600px) {
+            nav a { margin-left: 14px; font-size: 0.9rem; }
+            .hero { padding: 56px 0 40px; }
+        }
+    </style>
 </head>
 
 <body>
 
-    <h1>MM5AGM</h1>
+    <header>
+        <div class="wrap">
+            <a class="logo" href="#">MM5AGM</a>
+            <nav>
+                <a href="#ywc">Yaesu</a>
+                <a href="#iwc">Icom</a>
+                <a href="#about">About</a>
+            </nav>
+        </div>
+    </header>
 
-    <h2>Amateur Radio Software Development</h2>
+    <main>
+        <!-- ---------- Hero ---------- -->
+        <section class="hero">
+            <div class="wrap">
+                <div class="eyebrow">Amateur Radio Software</div>
+                <h1>Run your transceiver from any browser</h1>
+                <p>
+                    Yaesu Web Control and Icom Web Control put your radio on your PC, tablet or phone:
+                    a live spectrum, meters, CW and RTTY decoding, DX spots and more.
+                    Both are free and open source.
+                </p>
+                <div class="buttons">
+                    <a class="btn primary" href="#ywc">Yaesu Web Control</a>
+                    <a class="btn primary" href="#iwc">Icom Web Control</a>
+                </div>
+            </div>
+        </section>
 
-    <p>
-        Welcome to my website.
-    </p>
+        <!-- ---------- Yaesu Web Control ---------- -->
+        <section class="product" id="ywc">
+            <div class="wrap">
+                <div class="product-head">
+                    <h2>Yaesu Web Control</h2>
+                    <span class="tag">YWC</span>
+                </div>
+                <p class="lead">
+                    Browser-based control for Yaesu HF transceivers. Use the Classic page, the dockable
+                    Experimental UI, or the Radio panel, which is laid out like the front of the radio
+                    with working keys, knobs and main dial. As well as the Windows installer, there are
+                    macOS, Linux and Docker versions of YWC, which also run on a Raspberry Pi.
+                </p>
+                <div class="badges">
+                    <img src="https://img.shields.io/github/v/release/mm5agm/Yaesu_Web_Control?style=flat-square&label=Latest"
+                        alt="Latest release">
+                    <img src="https://img.shields.io/github/downloads/mm5agm/Yaesu_Web_Control/total?style=flat-square&label=Downloads"
+                        alt="Downloads">
+                    <img src="https://img.shields.io/badge/Licence-GPL--3.0-blue?style=flat-square" alt="GPL-3.0">
+                </div>
 
-    <p>
-        Creator of the really good Yaesu Web Control and Icom Web Control.
-    </p>
+                <div class="views">
+                    <div class="view-tabs">
+                        <button aria-pressed="true" data-src="pictures/Radio_Dark_Console.png"
+                            data-alt="YWC Radio panel in the Dark Console theme on an FTdx101MP">Radio panel</button>
+                        <button aria-pressed="false" data-src="pictures/Radio_Night_Console.png"
+                            data-alt="YWC Radio panel in the Night Console theme">Radio panel · Night</button>
+                        <button aria-pressed="false" data-src="pictures/Radio_Silver_Classic.png"
+                            data-alt="YWC Radio panel in the Silver Classic theme">Radio panel · Silver</button>
+                        <button aria-pressed="false" data-src="pictures/YWC_Classic.png"
+                            data-alt="YWC Classic page with meters, the radio's TFT screen, two SDR spectrum panels and a VFO card per receiver">Classic</button>
+                        <button aria-pressed="false" data-src="pictures/YWC_Experimental.png"
+                            data-alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, spectrum, remote audio and both VFOs">Experimental</button>
+                    </div>
+                    <a class="shot" href="pictures/Radio_Dark_Console.png">
+                        <img src="pictures/Radio_Dark_Console.png"
+                            alt="YWC Radio panel in the Dark Console theme on an FTdx101MP">
+                    </a>
+                </div>
 
-    <p>
-        <a href="https://github.com/mm5agm/Yaesu_Web_Control">
-            Yaesu Web Control
-        </a>
-    </p>
+                <div class="grid">
+                    <div class="card">
+                        <h3>SDR spectrum and waterfall</h3>
+                        <p>Live panadapter from an SDRplay or other SDR, or the radio's own scope.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The radio's screen in your browser</h3>
+                        <p>The radio's own TFT screen, captured from its DVI socket, and it's clickable.
+                            Click a signal on the scope or waterfall and the radio tunes straight to it.
+                            Tested on the FTdx101MP/D and FTdx10. The FT-710 also has a DVI output, but
+                            this hasn't been tested.</p>
+                    </div>
+                    <div class="card">
+                        <h3>CW and RTTY</h3>
+                        <p>CW reader and sender, an RTTY tuning scope with decode, and Auto set-up from the signal.</p>
+                    </div>
+                    <div class="card">
+                        <h3>DX spots and watch list</h3>
+                        <p>DX cluster spots on the spectrum, and a popup and beep when a callsign or
+                            prefix you're watching appears.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Voice control</h3>
+                        <p>Hold the mic button and say what you want: band, mode, frequency and more.
+                            Recognition runs locally on your PC, with no cloud service. On the Classic
+                            page, Windows only.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Voice announcements</h3>
+                        <p>YWC can speak band, mode and TX changes, DX alerts and TX timeout warnings,
+                            so you know what the radio is doing without looking at the screen. On the
+                            Classic page.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Accessible</h3>
+                        <p>Full screen reader support for NVDA and Windows Narrator, High Contrast mode,
+                            and labels you can rename in any language. On the Classic page.</p>
+                    </div>
+                    <div class="card">
+                        <h3>TX timeout warning</h3>
+                        <p>A red banner and tone if you've been transmitting too long, to catch an open
+                            mic or a stuck PTT.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Memories</h3>
+                        <p>Memory banks with ADIF import.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Works with your logger</h3>
+                        <p>Integrates with WSJT-X, Log4OM, JTAlert and GridTracker.</p>
+                    </div>
+                </div>
 
-    <img src="pictures/Radio_Dark_Console.png"
-     alt="Yaesu Web Control"
-     style="max-width:100%; height:auto;">
+                <div class="specs">
+                    <div>
+                        <h4>Supported radios</h4>
+                        <div class="chips">
+                            <span class="chip">FTdx101MP</span>
+                            <span class="chip">FTdx101D</span>
+                            <span class="chip">FTdx10</span>
+                            <span class="chip">FT-710</span>
+                            <span class="chip">FTDX3000</span>
+                        </div>
+                        <p class="note">Being tested: FT-991A, FTDX5000MP and FTDX5000D.</p>
+                    </div>
+                    <div>
+                        <h4>Runs on</h4>
+                        <div class="chips">
+                            <span class="chip">Windows</span>
+                            <span class="chip">macOS</span>
+                            <span class="chip">Linux</span>
+                            <span class="chip">Docker / Raspberry Pi</span>
+                        </div>
+                        <p class="note">
+                            The SDR spectrum display is Windows only. On macOS, Linux and Docker you
+                            can use the radio's own screen instead, captured from its DVI socket.
+                            These versions are the work of Fabio Valente, CR7CDC.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="buttons" style="justify-content:flex-start">
+                    <a class="btn primary" href="https://github.com/mm5agm/Yaesu_Web_Control/releases/latest">⬇ Download</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md">User manual</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_Web_Control">Source on GitHub</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_Web_Control/discussions">Discussions</a>
+                </div>
+                <p class="note">
+                    The installer isn't code-signed, so Windows or your antivirus may warn about it.
+                    <a href="https://github.com/mm5agm/Yaesu_Web_Control#%EF%B8%8F-windows-security-warnings-on-first-install">Here's what to do</a>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ---------- Icom Web Control ---------- -->
+        <section class="product" id="iwc">
+            <div class="wrap">
+                <div class="product-head">
+                    <h2>Icom Web Control</h2>
+                    <span class="tag">IWC</span>
+                </div>
+                <p class="lead">
+                    The companion to YWC for Icom CI-V transceivers. Frequency and mode, meters, PTT,
+                    the RX DSP, the CI-V spectrum scope, ATU and voice control, all from the browser.
+                </p>
+                <div class="badges">
+                    <img src="https://img.shields.io/github/v/release/mm5agm/Icom_Web_Control?style=flat-square&label=Latest"
+                        alt="Latest release">
+                    <img src="https://img.shields.io/github/downloads/mm5agm/Icom_Web_Control/total?style=flat-square&label=Downloads"
+                        alt="Downloads">
+                    <img src="https://img.shields.io/badge/Licence-GPL--3.0-blue?style=flat-square" alt="GPL-3.0">
+                </div>
+
+                <div class="views">
+                    <div class="view-tabs">
+                        <button aria-pressed="true" data-src="pictures/IWC_Radio_Panel.png"
+                            data-alt="IWC Radio panel on an IC-7300 MkII, with the S-meter, VFOs, CI-V scope and main dial">Radio panel</button>
+                        <button aria-pressed="false" data-src="pictures/IWC_Classic.png"
+                            data-alt="IWC Classic page with meters, two spectrum scopes and a card for each VFO">Classic</button>
+                    </div>
+                    <a class="shot" href="pictures/IWC_Radio_Panel.png">
+                        <img src="pictures/IWC_Radio_Panel.png"
+                            alt="IWC Radio panel on an IC-7300 MkII, with the S-meter, VFOs, CI-V scope and main dial"
+                            loading="lazy">
+                    </a>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>CI-V spectrum scope</h3>
+                        <p>The radio's own scope and waterfall, streamed to the browser.</p>
+                    </div>
+                    <div class="card">
+                        <h3>RTTY that decodes</h3>
+                        <p>Crossed-ellipse tuning scope and text decode. Auto measures shift and speed for you.</p>
+                    </div>
+                    <div class="card">
+                        <h3>CW reader and sender</h3>
+                        <p>Copy and send Morse from the browser.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Voice control</h3>
+                        <p>Change band, mode and frequency by speaking.</p>
+                    </div>
+                    <div class="card">
+                        <h3>WSJT-X bridge</h3>
+                        <p>Built-in rigctld bridge, so WSJT-X and IWC share the radio.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Three layouts</h3>
+                        <p>Classic, the Experimental UI and the Radio panel.</p>
+                    </div>
+                </div>
+
+                <div class="specs">
+                    <div>
+                        <h4>Supported radios</h4>
+                        <div class="chips">
+                            <span class="chip">IC-7300</span>
+                            <span class="chip">IC-7300 MkII</span>
+                        </div>
+                    </div>
+                    <div>
+                        <h4>Runs on</h4>
+                        <div class="chips">
+                            <span class="chip">Windows</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="buttons" style="justify-content:flex-start">
+                    <a class="btn primary" href="https://github.com/mm5agm/Icom_Web_Control/releases/latest">⬇ Download</a>
+                    <a class="btn" href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md">User manual</a>
+                    <a class="btn" href="https://github.com/mm5agm/Icom_Web_Control">Source on GitHub</a>
+                </div>
+                <p class="note">
+                    The installer isn't code-signed, so Windows or your antivirus may warn about it.
+                    <a href="https://github.com/mm5agm/Icom_Web_Control#%EF%B8%8F-windows-security-warnings-on-first-install">Here's what to do</a>.
+                </p>
+            </div>
+        </section>
+
+        <!-- ---------- About ---------- -->
+        <section class="about" id="about">
+            <div class="wrap">
+                <h2>About</h2>
+                <p>
+                    I'm Colin, MM5AGM, in Scotland. I write YWC and IWC for my own station, an FTdx101MP
+                    with an SDRplay for the spectrum and an IC-7300 MkII on the bench, and share them so
+                    other operators can use them too.
+                </p>
+                <p>
+                    Thanks to Fabio Valente, CR7CDC, for the radio-screen capture, the Experimental UI,
+                    and the macOS, Linux and Docker versions of YWC, including running it on a
+                    Raspberry Pi.
+                </p>
+                <p>
+                    If your radio, mode or setup is different from mine, I'd like to hear how you get on.
+                    Even a one-line "works fine" helps. Post on
+                    <a href="https://github.com/mm5agm/Yaesu_Web_Control/discussions">GitHub Discussions</a>
+                    or open an issue on either project.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="wrap">
+            <span>© MM5AGM · 73</span>
+            <span>
+                <a href="https://github.com/mm5agm">github.com/mm5agm</a>
+            </span>
+        </div>
+    </footer>
+
+    <script>
+        // Screenshot switcher: each button swaps the picture below it.
+        document.querySelectorAll(".views").forEach(function (views) {
+            var link = views.querySelector(".shot");
+            var img = link.querySelector("img");
+            var buttons = views.querySelectorAll(".view-tabs button");
+            buttons.forEach(function (btn) {
+                btn.addEventListener("click", function () {
+                    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
+                    img.src = btn.dataset.src;
+                    img.alt = btn.dataset.alt;
+                    link.href = btn.dataset.src;
+                });
+            });
+        });
+    </script>
 
 </body>
 
