@@ -449,6 +449,8 @@
                             data-alt="IWC Radio panel on an IC-7300 MkII, with the S-meter, VFOs, CI-V scope and main dial">Radio panel</button>
                         <button aria-pressed="false" data-src="pictures/IWC_Classic.png"
                             data-alt="IWC Classic page with meters, two spectrum scopes and a card for each VFO">Classic</button>
+                        <button aria-pressed="false" data-src="pictures/IWC_Experimental.png"
+                            data-alt="IWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, spectrum and both VFOs">Experimental</button>
                     </div>
                     <a class="shot" href="pictures/IWC_Radio_Panel.png">
                         <img src="pictures/IWC_Radio_Panel.png"
@@ -546,17 +548,46 @@
     </footer>
 
     <script>
+        // The Radio panel screenshots show the app's own CLASSIC / EXPERIMENTAL / RADIO
+        // links. Where they sit in each picture, in its pixels: [left, top, right, bottom].
+        var VIEW_LINKS = {
+            "pictures/IWC_Radio_Panel.png":      { Classic: [445, 35, 532, 72], Experimental: [535, 35, 672, 72], Radio: [677, 35, 750, 72] },
+            "pictures/Radio_Dark_Console.png":   { Classic: [472, 40, 563, 76], Experimental: [565, 40, 700, 76], Radio: [705, 40, 778, 76] },
+            "pictures/Radio_Night_Console.png":  { Classic: [465, 40, 557, 77], Experimental: [558, 40, 695, 77], Radio: [700, 40, 772, 77] },
+            "pictures/Radio_Silver_Classic.png": { Classic: [472, 38, 565, 75], Experimental: [566, 38, 702, 75], Radio: [706, 38, 780, 75] }
+        };
+
         // Screenshot switcher: each button swaps the picture below it.
         document.querySelectorAll(".views").forEach(function (views) {
             var link = views.querySelector(".shot");
             var img = link.querySelector("img");
             var buttons = views.querySelectorAll(".view-tabs button");
+            var show = function (btn) {
+                buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
+                img.src = btn.dataset.src;
+                img.alt = btn.dataset.alt;
+                link.href = btn.dataset.src;
+            };
             buttons.forEach(function (btn) {
-                btn.addEventListener("click", function () {
-                    buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
-                    img.src = btn.dataset.src;
-                    img.alt = btn.dataset.alt;
-                    link.href = btn.dataset.src;
+                btn.addEventListener("click", function () { show(btn); });
+            });
+            // Clicking a view link drawn in the picture switches to that view, as the
+            // buttons do, instead of opening the full-size picture.
+            link.addEventListener("click", function (e) {
+                var links = VIEW_LINKS[link.getAttribute("href")];
+                if (!links || !img.naturalWidth) return;
+                var r = img.getBoundingClientRect();
+                var x = (e.clientX - r.left) * img.naturalWidth / r.width;
+                var y = (e.clientY - r.top) * img.naturalHeight / r.height;
+                Object.keys(links).forEach(function (view) {
+                    var b = links[view];
+                    if (x < b[0] || x > b[2] || y < b[1] || y > b[3]) return;
+                    e.preventDefault();
+                    if (view === "Radio") return;   // already showing a Radio panel
+                    var btn = Array.prototype.find.call(buttons, function (t) {
+                        return t.textContent.trim().indexOf(view) === 0;
+                    });
+                    if (btn && btn.getAttribute("aria-pressed") !== "true") show(btn);
                 });
             });
         });
