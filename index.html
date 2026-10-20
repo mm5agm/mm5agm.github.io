@@ -2,6 +2,7 @@
 <html>
 
 <head>
+
     <title>MM5AGM - Amateur Radio Software Development</title>
 
     <style>
@@ -10,60 +11,72 @@
             background-color: #111827;
             color: white;
             font-family: Arial, Helvetica, sans-serif;
-            max-width: 1200px;
+            max-width: 1400px;
             margin: auto;
-            padding: 30px;
-            text-align: center;
+            padding: 20px;
         }
 
         h1 {
+            text-align: center;
             color: #60a5fa;
             font-size: 60px;
             margin-bottom: 10px;
         }
 
         h2 {
+            color: #93c5fd;
+        }
+
+        .subtitle {
+            text-align: center;
+            font-size: 22px;
             color: #d1d5db;
+            margin-bottom: 40px;
         }
 
-        p {
-            font-size: 18px;
-            line-height: 1.6;
+        .project {
+            background-color: #1f2937;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 40px;
         }
 
-        a.button {
+        .project img {
+            width: 100%;
+            max-width: 1000px;
+            border-radius: 10px;
+            display: block;
+            margin: auto;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .button {
             display: inline-block;
             background-color: #2563eb;
             color: white;
             text-decoration: none;
             padding: 12px 24px;
-            margin: 10px;
+            margin: 8px;
             border-radius: 6px;
             font-weight: bold;
         }
 
-        a.button:hover {
+        .button:hover {
             background-color: #3b82f6;
         }
 
-        img {
-            width: 100%;
-            max-width: 1000px;
-            border-radius: 10px;
-            margin-top: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0px 0px 20px rgba(0,0,0,0.6);
-        }
-
-        .section {
-            margin-top: 50px;
-        }
-
         ul {
-            text-align: left;
-            display: inline-block;
-            font-size: 18px;
             line-height: 1.8;
+        }
+
+        .footer {
+            margin-top: 50px;
+            text-align: center;
+            color: #9ca3af;
         }
 
     </style>
@@ -74,44 +87,34 @@
 
     <h1>MM5AGM</h1>
 
-    <h2>Amateur Radio Software Development</h2>
-
-    <p>
-        Browser-based CAT control software for Yaesu and Icom transceivers.
-    </p>
-
-    <p>
-        Designed for local and remote amateur radio operation.
-    </p>
-
-    <p>
-        Creator of Yaesu Web Control and Icom Web Control.
-    </p>
-
-    <a class="button"
-       href="https://github.com/mm5agm/Yaesu_Web_Control">
-       Yaesu Web Control
-    </a>
-
-    <a class="button"
-       href="https://github.com/mm5agm">
-       GitHub Profile
-    </a>
-
-    <div>
-        <a href="https://github.com/mm5agm/Yaesu_Web_Control">
-            <img src="pictures/Radio_Dark_Console.png"
-                 alt="Yaesu Web Control Screenshot">
-        </a>
+    <div class="subtitle">
+        Open Source Amateur Radio Software
     </div>
 
-    <div class="section">
+    <div class="project">
 
-        <h2>Yaesu Web Control</h2>
+        <h2>Yaesu Web Control (YWC)</h2>
 
         <p>
-            A modern browser-based CAT controller for Yaesu HF transceivers.
+            Browser-based CAT control software for Yaesu HF transceivers.
+            Designed for local and remote station operation using any modern web browser.
         </p>
+
+        <a href="https://github.com/mm5agm/Yaesu_Web_Control">
+            <img src="pictures/Radio_Dark_Console.png"
+                 alt="Yaesu Web Control">
+        </a>
+
+        <div class="buttons">
+
+            <a class="button"
+               href="https://github.com/mm5agm/Yaesu_Web_Control">
+               GitHub Repository
+            </a>
+
+        </div>
+
+        <h3>Features</h3>
 
         <ul>
             <li>Browser based operation</li>
@@ -119,20 +122,65 @@
             <li>CAT control</li>
             <li>CW support</li>
             <li>Audio streaming</li>
-            <li>Multi-platform operation</li>
+            <li>Multiple user interface themes</li>
+            <li>Multi-platform support</li>
         </ul>
 
     </div>
 
-    <div class="section">
+    <div class="project">
+
+        <h2>Icom Web Control (IWC)</h2>
+
+        <p>
+            Browser-based control software for the Icom IC-7300 and
+            IC-7300MK2 transceivers.
+        </p>
+
+        <p>
+            Add a screenshot here when available.
+        </p>
+
+        <div class="buttons">
+
+            <a class="button"
+               href="https://github.com/mm5agm/Icom_Web_Control">
+               GitHub Repository
+            </a>
+
+        </div>
+
+        <h3>Supported Radios</h3>
+
+        <ul>
+            <li>Icom IC-7300</li>
+            <li>Icom IC-7300MK2</li>
+        </ul>
+
+    </div>
+
+    <div class="project">
 
         <h2>About MM5AGM</h2>
 
         <p>
-            Amateur radio operator based in Scotland with interests in
-            remote station operation, software development, web technologies
-            and radio control systems.
+            Amateur radio operator and software developer based in Scotland.
+            Specialising in browser-based radio control systems, remote station
+            operation and amateur radio software development.
         </p>
+
+    </div>
+
+    <div class="footer">
+
+        MM5AGM Amateur Radio Software Development
+
+        <br><br>
+
+        <a href="https://github.com/mm5agm"
+           style="color:#60a5fa;">
+           View all projects on GitHub
+        </a>
 
     </div>
 
