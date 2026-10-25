@@ -313,8 +313,10 @@
 
                 <div class="views">
                     <div class="view-tabs">
-                        <button aria-pressed="true" data-src="pictures/Radio_Dark_Console.png"
-                            data-alt="YWC Radio panel in the Dark Console theme on an FTdx101MP">Radio panel</button>
+                        <button aria-pressed="true" data-src="pictures/Radio_Both_SDRs.png"
+                            data-alt="YWC Radio panel on an FTdx101MP, with an SDR spectrum and waterfall for the Main and Sub receivers one above the other">Radio panel · both SDRs</button>
+                        <button aria-pressed="false" data-src="pictures/Radio_Dark_Console.png"
+                            data-alt="YWC Radio panel in the Dark Console theme, showing the radio's own TFT screen">Radio panel · TFT screen</button>
                         <button aria-pressed="false" data-src="pictures/Radio_Night_Console.png"
                             data-alt="YWC Radio panel in the Night Console theme">Radio panel · Night</button>
                         <button aria-pressed="false" data-src="pictures/Radio_Silver_Classic.png"
@@ -324,16 +326,17 @@
                         <button aria-pressed="false" data-src="pictures/YWC_Experimental.png"
                             data-alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, spectrum, remote audio and both VFOs">Experimental</button>
                     </div>
-                    <a class="shot" href="pictures/Radio_Dark_Console.png">
-                        <img src="pictures/Radio_Dark_Console.png"
-                            alt="YWC Radio panel in the Dark Console theme on an FTdx101MP">
+                    <a class="shot" href="pictures/Radio_Both_SDRs.png">
+                        <img src="pictures/Radio_Both_SDRs.png"
+                            alt="YWC Radio panel on an FTdx101MP, with an SDR spectrum and waterfall for the Main and Sub receivers one above the other">
                     </a>
                 </div>
 
                 <div class="grid">
                     <div class="card">
                         <h3>SDR spectrum and waterfall</h3>
-                        <p>Live panadapter from an SDRplay or other SDR, or the radio's own scope.</p>
+                        <p>Live panadapter and waterfall from an SDRplay or other SDR, or the radio's own scope.
+                            Show Main, Sub, or both receivers at once.</p>
                     </div>
                     <div class="card">
                         <h3>The radio's screen in your browser</h3>
@@ -433,7 +436,7 @@
                 </div>
                 <p class="lead">
                     The companion to YWC for Icom CI-V transceivers. Frequency and mode, meters, PTT,
-                    the RX DSP, the CI-V spectrum scope, ATU and voice control, all from the browser.
+                    the RX DSP, the CI-V spectrum scope for both VFOs, ATU and voice control, all from the browser.
                 </p>
                 <div class="badges">
                     <img src="https://img.shields.io/github/v/release/mm5agm/Icom_Web_Control?style=flat-square&label=Latest"
@@ -446,7 +449,7 @@
                 <div class="views">
                     <div class="view-tabs">
                         <button aria-pressed="true" data-src="pictures/IWC_Radio_Panel.png"
-                            data-alt="IWC Radio panel on an IC-7300 MkII, with the S-meter, VFOs, CI-V scope and main dial">Radio panel</button>
+                            data-alt="IWC Radio panel on an IC-7300 MkII, with VFO A on 20 m and VFO B on 40 m, a CI-V scope for each with DX spots, and the main dial">Radio panel</button>
                         <button aria-pressed="false" data-src="pictures/IWC_Classic.png"
                             data-alt="IWC Classic page with meters, two spectrum scopes and a card for each VFO">Classic</button>
                         <button aria-pressed="false" data-src="pictures/IWC_Experimental.png"
@@ -454,7 +457,7 @@
                     </div>
                     <a class="shot" href="pictures/IWC_Radio_Panel.png">
                         <img src="pictures/IWC_Radio_Panel.png"
-                            alt="IWC Radio panel on an IC-7300 MkII, with the S-meter, VFOs, CI-V scope and main dial"
+                            alt="IWC Radio panel on an IC-7300 MkII, with VFO A on 20 m and VFO B on 40 m, a CI-V scope for each with DX spots, and the main dial"
                             loading="lazy">
                     </a>
                 </div>
@@ -463,6 +466,11 @@
                     <div class="card">
                         <h3>CI-V spectrum scope</h3>
                         <p>The radio's own scope and waterfall, streamed to the browser.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Watch both VFOs</h3>
+                        <p>A scope for VFO A and one for VFO B, even on different bands. X-Watch looks at the
+                            other band every few seconds, and one click turns it off during a QSO.</p>
                     </div>
                     <div class="card">
                         <h3>RTTY that decodes</h3>
