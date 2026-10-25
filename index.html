@@ -324,13 +324,13 @@
                         <button aria-pressed="true" data-src="pictures/Radio_Both_SDRs.png"
                             data-alt="YWC Radio panel on an FTdx101MP, with an SDR spectrum and waterfall for the Main and Sub receivers one above the other">Radio panel</button>
                         <button aria-pressed="false" data-src="pictures/Radio_Night_Console.png"
-                            data-alt="YWC Radio panel in the Night Console theme">Radio panel · Night</button>
+                            data-alt="YWC Radio panel in the Night (red) theme, showing the radio's own TFT screen with Main on 20 m FT8 and Sub on 40 m FT8">Radio panel · Night</button>
                         <button aria-pressed="false" data-src="pictures/Radio_Silver_Classic.png"
-                            data-alt="YWC Radio panel in the Silver Classic theme">Radio panel · Silver</button>
+                            data-alt="YWC Radio panel in the Silver classic theme, with SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8 one above the other">Radio panel · Silver</button>
                         <button aria-pressed="false" data-src="pictures/YWC_Classic.png"
-                            data-alt="YWC Classic page with meters, the radio's TFT screen, two SDR spectrum panels and a VFO card per receiver">Classic</button>
+                            data-alt="YWC Classic page with the Views dropdown, meters, the radio's TFT screen, SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8, and a VFO card per receiver">Classic</button>
                         <button aria-pressed="false" data-src="pictures/YWC_Experimental.png"
-                            data-alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, spectrum, remote audio and both VFOs">Experimental</button>
+                            data-alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, remote audio, an SDR spectrum for each receiver and both VFOs">Experimental</button>
                     </div>
                     <a class="shot" href="pictures/Radio_Both_SDRs.png">
                         <img src="pictures/Radio_Both_SDRs.png"
@@ -573,13 +573,6 @@
     </footer>
 
     <script>
-        // The Radio panel screenshots show the app's own CLASSIC / EXPERIMENTAL / RADIO
-        // links. Where they sit in each picture, in its pixels: [left, top, right, bottom].
-        var VIEW_LINKS = {
-            "pictures/Radio_Night_Console.png":  { Classic: [465, 40, 557, 77], Experimental: [558, 40, 695, 77], Radio: [700, 40, 772, 77] },
-            "pictures/Radio_Silver_Classic.png": { Classic: [472, 38, 565, 75], Experimental: [566, 38, 702, 75], Radio: [706, 38, 780, 75] }
-        };
-
         // Screenshot switcher: each button swaps the picture below it.
         document.querySelectorAll(".views").forEach(function (views) {
             var link = views.querySelector(".shot");
@@ -593,25 +586,6 @@
             };
             buttons.forEach(function (btn) {
                 btn.addEventListener("click", function () { show(btn); });
-            });
-            // Clicking a view link drawn in the picture switches to that view, as the
-            // buttons do, instead of opening the full-size picture.
-            link.addEventListener("click", function (e) {
-                var links = VIEW_LINKS[link.getAttribute("href")];
-                if (!links || !img.naturalWidth) return;
-                var r = img.getBoundingClientRect();
-                var x = (e.clientX - r.left) * img.naturalWidth / r.width;
-                var y = (e.clientY - r.top) * img.naturalHeight / r.height;
-                Object.keys(links).forEach(function (view) {
-                    var b = links[view];
-                    if (x < b[0] || x > b[2] || y < b[1] || y > b[3]) return;
-                    e.preventDefault();
-                    if (view === "Radio") return;   // already showing a Radio panel
-                    var btn = Array.prototype.find.call(buttons, function (t) {
-                        return t.textContent.trim().indexOf(view) === 0;
-                    });
-                    if (btn && btn.getAttribute("aria-pressed") !== "true") show(btn);
-                });
             });
         });
     </script>
