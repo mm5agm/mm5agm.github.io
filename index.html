@@ -195,6 +195,28 @@
             margin-top: 8px;
         }
 
+        /* A picture beside the words, or the words above a wide picture. */
+        .block { margin: 40px 0; scroll-margin-top: 76px; }
+
+        .block h3 { margin: 0 0 8px; font-size: 1.35rem; }
+
+        .block p { color: var(--muted); margin: 0 0 12px; }
+
+        .block figure { margin: 0; }
+
+        .block .shot { width: fit-content; max-width: 100%; }
+
+        .feature {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 28px;
+            align-items: start;
+        }
+
+        .feature.narrow-pic { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+
+        .feature .views { margin: 0; }
+
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -264,6 +286,10 @@
             nav a { margin-left: 14px; font-size: 0.9rem; }
             .hero { padding: 56px 0 40px; }
         }
+
+        @media (max-width: 800px) {
+            .feature, .feature.narrow-pic { grid-template-columns: minmax(0, 1fr); }
+        }
     </style>
 </head>
 
@@ -273,6 +299,7 @@
         <div class="wrap">
             <a class="logo" href="#">MM5AGM</a>
             <nav>
+                <a href="#both">In both</a>
                 <a href="#ywc">Yaesu</a>
                 <a href="#iwc">Icom</a>
                 <a href="#about">About</a>
@@ -288,12 +315,244 @@
                 <h1>Run your transceiver from any browser</h1>
                 <p>
                     Yaesu Web Control and Icom Web Control put your radio on your PC, tablet or phone:
-                    a live spectrum, meters, CW and RTTY decoding, DX spots and more.
-                    Both are free and open source.
+                    a live spectrum, meters, CW reading and sending, RTTY decoding, a screen for RTTY
+                    contests, DX spots and more. Both are free and open source.
                 </p>
                 <div class="buttons">
                     <a class="btn primary" href="#ywc">Yaesu Web Control</a>
                     <a class="btn primary" href="#iwc">Icom Web Control</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ---------- In both programs ---------- -->
+        <section class="product" id="both">
+            <div class="wrap">
+                <div class="product-head">
+                    <h2>In both programs</h2>
+                </div>
+                <p class="lead">
+                    Everything in this section is in Yaesu Web Control and Icom Web Control alike. Each has
+                    four views of the radio: the Classic page, the dockable Experimental UI, the Radio panel,
+                    which is laid out like the front of a radio with working keys, knobs and main dial,
+                    and RTTY Contest, a screen just for RTTY contesting.
+                </p>
+
+                <div class="block feature">
+                    <div class="views">
+                        <div class="view-tabs">
+                            <button aria-pressed="true" data-src="pictures/YWC_Classic.png?v=2"
+                                data-alt="YWC Classic page with meters, the radio's TFT screen, SDR spectrums for Main and Sub, and a large VFO card per receiver">Yaesu</button>
+                            <button aria-pressed="false" data-src="pictures/IWC_Classic.png?v=2"
+                                data-alt="IWC Classic page with meters, a spectrum for VFO A and VFO B side by side, and a large card for each VFO">Icom</button>
+                        </div>
+                        <a class="shot" href="pictures/YWC_Classic.png?v=2">
+                            <img src="pictures/YWC_Classic.png?v=2"
+                                alt="YWC Classic page with meters, the radio's TFT screen, SDR spectrums for Main and Sub, and a large VFO card per receiver"
+                                loading="lazy">
+                        </a>
+                    </div>
+                    <div>
+                        <h3>Classic: written for partially sighted operators</h3>
+                        <p>
+                            I wrote this because I can't see the FTdx101MP's controls without a magnifying
+                            glass, and many of the IC-7300's controls are tucked away on touchscreen menu
+                            pages. The Classic page was written specifically with partially sighted
+                            operators in mind, so that they can operate the radio using a screen reader
+                            and voice control.
+                        </p>
+                        <p>
+                            It works with NVDA and Windows Narrator, and you can say the band, mode or
+                            frequency you want. The program can speak band, mode and TX changes, DX alerts
+                            and TX timeout warnings, so you know what the radio is doing without looking
+                            at the screen. It works with Windows High Contrast, and you can rename the
+                            labels in any language.
+                        </p>
+                        <p>
+                            Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#16-accessibility-and-screen-readers">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#16-accessibility-and-screen-readers">IWC</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <h3>CW Reader</h3>
+                    <p>
+                        The CW Reader prints the Morse in the radio's receive audio as text, with no extra
+                        hardware and nothing transmitted. Reader Mode sets the radio up for copy and puts
+                        your settings back when you stop. The status line says what it is hearing, and
+                        when it isn't sure it says so rather than guessing. Each session is saved as a
+                        transcript, and contacts go to an ADIF file.
+                        Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#20-cw-reader">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#18-cw-reader">IWC</a>
+                    </p>
+                    <figure>
+                        <a class="shot" href="pictures/CW_Reader.png">
+                            <img src="pictures/CW_Reader.png"
+                                alt="The CW Reader window with decoded Morse coloured to mark callsigns, reports and QSO words, a status line, and two tuning aids at the side"
+                                loading="lazy">
+                        </a>
+                    </figure>
+                </div>
+
+                <div class="block feature">
+                    <figure>
+                        <a class="shot" href="pictures/CW_Send.png">
+                            <img src="pictures/CW_Send.png"
+                                alt="The CW Send window part way through a long line, with the character being keyed highlighted and a tag showing part 2 of 3"
+                                loading="lazy">
+                        </a>
+                    </figure>
+                    <div>
+                        <h3>CW Send: type it and the radio sends it</h3>
+                        <p>
+                            Type a line and press Enter, and the radio keys it. You need only the cable
+                            that already goes to the radio. The character being keyed is highlighted as it
+                            goes, you can type ahead, and Stop or Escape cuts it short. With break-in off,
+                            it goes to the sidetone and nothing is transmitted.
+                        </p>
+                        <p>
+                            On the IC-7300 it hasn't yet been used on air by a CW operator, so feedback
+                            is especially welcome.
+                            Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#21-cw-send">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#19-cw-send">IWC</a>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="block feature" id="paddle">
+                    <div>
+                        <h3>CW Paddle: send with your own paddle</h3>
+                        <p>
+                            For when the radio is somewhere else: a remote station, the shack at the
+                            bottom of the garden, or a laptop in another room. At the radio, plug the
+                            paddle into its KEY jack as usual. The paddle goes into a small USB adapter
+                            that shows up as a MIDI device, plugged into the computer your browser runs
+                            on. The keyer and sidetone run in the browser, so what you hear never waits
+                            on the network, and it starts in dry run so you can practise without
+                            transmitting.
+                        </p>
+                        <p>
+                            The adapter can be a paddle-to-MIDI converter such as the HaliKey MIDI, or an
+                            ESP32-S3 board that you program from the page with one button. The ESP32 is
+                            only three wires: dit to GPIO4, dah to GPIO5 and the paddle's common to GND,
+                            with no resistors.
+                        </p>
+                        <p>
+                            It has to be a board whose native USB port is on a socket. I use an
+                            ESP32-S3-DevKitC-1, which has two USB sockets: the adapter uses the one marked
+                            USB, not the one marked COM or UART. The original ESP32 and the ESP32-C3 won't
+                            work. The page needs Chrome or Edge.
+                        </p>
+                        <p>
+                            New and still being tested. It has been tested on a Yaesu but has not yet
+                            keyed an IC-7300, so please tell me how it goes.
+                            Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#23-cw-paddle">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#21-cw-paddle">IWC</a>
+                        </p>
+                    </div>
+                    <figure>
+                        <a class="shot" href="pictures/ESP32_Paddle_Adapter.jpg">
+                            <img src="pictures/ESP32_Paddle_Adapter.jpg"
+                                alt="An ESP32-S3 board with two USB-C sockets, plugged into a green screw-terminal expansion board, with wires in the terminals and two USB cables connected"
+                                loading="lazy">
+                        </a>
+                        <figcaption class="note">An ESP32-S3-DevKitC-1 on a screw-terminal expansion board, so no soldering is needed.</figcaption>
+                    </figure>
+                </div>
+
+
+                <div class="block feature narrow-pic">
+                    <div class="views">
+                        <div class="view-tabs">
+                            <button aria-pressed="true" data-src="pictures/RTTY_Tuner_YWC.png"
+                                data-alt="The RTTY Tuner window with Mark 2125 and Shift 170, showing a green crossed-ellipse pattern on the tuning scope">Yaesu</button>
+                            <button aria-pressed="false" data-src="pictures/RTTY_Tuner_IWC.png"
+                                data-alt="The IWC RTTY Tuner window on the German weather station DDK9 after Auto: mark 2567 Hz, shift 450 Hz, 50 baud, reversed, with a sharp cross on the tuning scope">Icom, on DDK9</button>
+                        </div>
+                        <a class="shot" href="pictures/RTTY_Tuner_YWC.png">
+                            <img src="pictures/RTTY_Tuner_YWC.png"
+                                alt="The RTTY Tuner window with Mark 2125 and Shift 170, showing a green crossed-ellipse pattern on the tuning scope"
+                                loading="lazy">
+                        </a>
+                    </div>
+                    <div>
+                        <h3>RTTY tuner and RTTY Contest</h3>
+                        <p>
+                            The RTTY tuner draws the crossed-ellipse tuning scope and decodes the text, and
+                            Auto sets the tones up from the signal. The Icom picture is the German weather
+                            station DDK9 on 10.1008 MHz, where Auto measured a 450 Hz shift, 50 baud and
+                            reversed tones.
+                            Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#22-rtty">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#20-rtty">IWC</a>
+                        </p>
+                        <p>
+                            RTTY Contest is a screen with only what a contest RTTY operator uses: the
+                            frequency, band keys that land on each band's RTTY spot, the spectrum over the
+                            waterfall, and the tuner docked at the side with its decoded text. There is a
+                            tuning dial, your memories, and DX spots. Every part can go to a window of its
+                            own, and named layouts put every window back on its own monitor. Bruce VK2RT
+                            asked for it and tested it. It is still being tested.
+                            Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#524-rtty-contest">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#521-rtty-contest">IWC</a>
+                        </p>
+                        <p>
+                            RTTY is receive only: transmit from your logger, or from MMTTY.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="block">
+                    <figure>
+                        <a class="shot" href="pictures/RTTY_Contest_DDK9.png">
+                            <img src="pictures/RTTY_Contest_DDK9.png"
+                                alt="The RTTY Contest screen in YWC on the German weather station DDK9: the spectrum over the waterfall with the two tones, the RTTY Tuner showing a sharp cross at Mark 2448, Shift 450, 50 baud, reversed, and decoded text with the station's callsign and frequencies followed by a gale warning for the German Bight"
+                                loading="lazy">
+                        </a>
+                        <figcaption class="note">The RTTY Contest screen in YWC on DDK9. The decoded text is the station giving its callsign and frequencies, then a gale warning for the German Bight.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="block">
+                    <figure>
+                        <a class="shot" href="pictures/RTTY_Decode.png">
+                            <img src="pictures/RTTY_Decode.png"
+                                alt="The RTTY window decoding contest exchanges such as G4ZWX TU IU2VBP CQ, with Mark 2131, Shift 170, 45.45 baud and a clean cross on the tuning scope"
+                                loading="lazy">
+                        </a>
+                        <figcaption class="note">Real copy off the air on my FTdx101MP in RTTY-L, through a 400 Hz IF filter. The odd wrong letter is ordinary RTTY in a crowded band.</figcaption>
+                    </figure>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>DX spots and watch list</h3>
+                        <p>DX cluster spots on the spectrum, and a popup and beep when a callsign or
+                            prefix you're watching appears. Watched stations are drawn in red.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Voice control</h3>
+                        <p>Change band, mode and frequency by speaking. Recognition runs locally on your
+                            PC, with no cloud service. Windows only.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Pop-out windows</h3>
+                        <p>Move the spectrum, tuner and other panels to windows of their own on
+                            another monitor.</p>
+                    </div>
+                    <div class="card">
+                        <h3>TX timeout warning</h3>
+                        <p>A red banner and tone if you've been transmitting too long, to catch an open
+                            mic or a stuck PTT.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Memories</h3>
+                        <p>Memory banks with ADIF import.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Radio power</h3>
+                        <p>Switches the radio on when the program starts, and can switch it off when
+                            it closes.</p>
+                    </div>
+                    <div class="card">
+                        <h3>Works with your logger</h3>
+                        <p>Integrates with WSJT-X, Log4OM, JTAlert and GridTracker, with a built-in rigctld
+                            bridge so they can share the radio.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -306,10 +565,11 @@
                     <span class="tag">YWC</span>
                 </div>
                 <p class="lead">
-                    Browser-based control for Yaesu HF transceivers. Use the Classic page, the dockable
-                    Experimental UI, or the Radio panel, which is laid out like the front of the radio
-                    with working keys, knobs and main dial. As well as the Windows installer, there are
-                    macOS, Linux and Docker versions of YWC, which also run on a Raspberry Pi.
+                    Browser-based control for Yaesu HF transceivers. As well as everything
+                    <a href="#both">in both programs</a>, YWC has an SDR spectrum for each receiver, the
+                    radio's own screen in the browser, and audio to and from the browser. As well as the
+                    Windows installer, there are macOS, Linux and Docker versions of YWC, which also run
+                    on a Raspberry Pi.
                 </p>
                 <div class="badges">
                     <img src="https://img.shields.io/github/v/release/mm5agm/Yaesu_Web_Control?style=flat-square&label=Latest"
@@ -361,43 +621,9 @@
                             this hasn't been tested.</p>
                     </div>
                     <div class="card">
-                        <h3>CW and RTTY</h3>
-                        <p>CW reader and sender, an RTTY tuning scope with decode, and Auto set-up from the signal.</p>
-                    </div>
-                    <div class="card">
-                        <h3>DX spots and watch list</h3>
-                        <p>DX cluster spots on the spectrum, and a popup and beep when a callsign or
-                            prefix you're watching appears.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Voice control</h3>
-                        <p>Hold the mic button and say what you want: band, mode, frequency and more.
-                            Recognition runs locally on your PC, with no cloud service. On the Classic
-                            page, Windows only.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Voice announcements</h3>
-                        <p>YWC can speak band, mode and TX changes, DX alerts and TX timeout warnings,
-                            so you know what the radio is doing without looking at the screen. On the
-                            Classic page.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Accessible</h3>
-                        <p>Full screen reader support for NVDA and Windows Narrator, High Contrast mode,
-                            and labels you can rename in any language. On the Classic page.</p>
-                    </div>
-                    <div class="card">
-                        <h3>TX timeout warning</h3>
-                        <p>A red banner and tone if you've been transmitting too long, to catch an open
-                            mic or a stuck PTT.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Memories</h3>
-                        <p>Memory banks with ADIF import.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Works with your logger</h3>
-                        <p>Integrates with WSJT-X, Log4OM, JTAlert and GridTracker.</p>
+                        <h3>Remote audio</h3>
+                        <p>The radio's receive audio in the browser's speakers, and the browser's
+                            microphone into the radio. For your own network or a VPN.</p>
                     </div>
                 </div>
 
@@ -450,8 +676,10 @@
                     <span class="tag">IWC</span>
                 </div>
                 <p class="lead">
-                    The companion to YWC for Icom CI-V transceivers. Frequency and mode, meters, PTT,
-                    the RX DSP, the CI-V spectrum scope for both VFOs, ATU and voice control, all from the browser.
+                    The companion to YWC for Icom CI-V transceivers. As well as everything
+                    <a href="#both">in both programs</a>, IWC gives you frequency and mode, meters, PTT,
+                    the RX DSP, ATU and the radio's own spectrum scope for both VFOs from the browser,
+                    with no SDR needed.
                 </p>
                 <div class="badges">
                     <img src="https://img.shields.io/github/v/release/mm5agm/Icom_Web_Control?style=flat-square&label=Latest"
@@ -488,24 +716,8 @@
                             other band every few seconds, and one click turns it off during a QSO.</p>
                     </div>
                     <div class="card">
-                        <h3>RTTY that decodes</h3>
-                        <p>Crossed-ellipse tuning scope and text decode. Auto measures shift and speed for you.</p>
-                    </div>
-                    <div class="card">
-                        <h3>CW reader and sender</h3>
-                        <p>Copy and send Morse from the browser.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Voice control</h3>
-                        <p>Change band, mode and frequency by speaking.</p>
-                    </div>
-                    <div class="card">
-                        <h3>WSJT-X bridge</h3>
-                        <p>Built-in rigctld bridge, so WSJT-X and IWC share the radio.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Three layouts</h3>
-                        <p>Classic, the Experimental UI and the Radio panel.</p>
+                        <h3>Back up the radio's menu</h3>
+                        <p>On the MkII, save the radio's own menu settings to a file and put them back.</p>
                     </div>
                 </div>
 
@@ -548,9 +760,11 @@
                     other operators can use them too.
                 </p>
                 <p>
-                    Thanks to Fabio Valente, CR7CDC, for the radio-screen capture, the Experimental UI,
-                    and the macOS, Linux and Docker versions of YWC, including running it on a
-                    Raspberry Pi.
+                    Thanks to Fabio Valente, CR7CDC, for the radio-screen capture, Remote Audio, the
+                    Experimental UI, and the macOS, Linux and Docker versions of YWC, including running
+                    it on a Raspberry Pi. Thanks also to Bruce, VK2RT, whose requests and testing shaped
+                    RTTY Contest, and to NK8O, whose FT-991A Companion gave me the idea for how to key
+                    a radio from a remote paddle.
                 </p>
                 <p>
                     If your radio, mode or setup is different from mine, I'd like to hear how you get on.
