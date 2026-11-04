@@ -161,7 +161,7 @@
 
         .view-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 
-        .view-tabs button {
+        .view-tabs label {
             font: 600 0.9rem Inter, system-ui, sans-serif;
             color: var(--muted);
             background: var(--panel-2);
@@ -171,12 +171,36 @@
             cursor: pointer;
         }
 
-        .view-tabs button:hover { color: var(--text); }
+        .view-tabs label:hover { color: var(--text); }
 
-        .view-tabs button[aria-pressed="true"] {
+        /* Screenshot switcher, in CSS alone: QRZ shows this site in a frame that blocks scripts. */
+        .views > input { position: absolute; opacity: 0; pointer-events: none; }
+
+        .views > .shot { display: none; }
+
+        .views > input:nth-of-type(1):checked ~ .shot:nth-of-type(1),
+        .views > input:nth-of-type(2):checked ~ .shot:nth-of-type(2),
+        .views > input:nth-of-type(3):checked ~ .shot:nth-of-type(3),
+        .views > input:nth-of-type(4):checked ~ .shot:nth-of-type(4),
+        .views > input:nth-of-type(5):checked ~ .shot:nth-of-type(5) { display: block; }
+
+        .views > input:nth-of-type(1):checked ~ .view-tabs label:nth-of-type(1),
+        .views > input:nth-of-type(2):checked ~ .view-tabs label:nth-of-type(2),
+        .views > input:nth-of-type(3):checked ~ .view-tabs label:nth-of-type(3),
+        .views > input:nth-of-type(4):checked ~ .view-tabs label:nth-of-type(4),
+        .views > input:nth-of-type(5):checked ~ .view-tabs label:nth-of-type(5) {
             color: #111;
             background: var(--amber);
             border-color: var(--amber);
+        }
+
+        .views > input:nth-of-type(1):focus-visible ~ .view-tabs label:nth-of-type(1),
+        .views > input:nth-of-type(2):focus-visible ~ .view-tabs label:nth-of-type(2),
+        .views > input:nth-of-type(3):focus-visible ~ .view-tabs label:nth-of-type(3),
+        .views > input:nth-of-type(4):focus-visible ~ .view-tabs label:nth-of-type(4),
+        .views > input:nth-of-type(5):focus-visible ~ .view-tabs label:nth-of-type(5) {
+            outline: 2px solid var(--amber);
+            outline-offset: 2px;
         }
 
         .shot {
@@ -340,15 +364,20 @@
 
                 <div class="block feature">
                     <div class="views">
+                        <input type="radio" name="views-classic" id="views-classic-1" checked>
+                        <input type="radio" name="views-classic" id="views-classic-2">
                         <div class="view-tabs">
-                            <button aria-pressed="true" data-src="pictures/YWC_Classic.png?v=2"
-                                data-alt="YWC Classic page with meters, the radio's TFT screen, SDR spectrums for Main and Sub, and a large VFO card per receiver">Yaesu</button>
-                            <button aria-pressed="false" data-src="pictures/IWC_Classic.png?v=2"
-                                data-alt="IWC Classic page with meters, a spectrum for VFO A and VFO B side by side, and a large card for each VFO">Icom</button>
+                            <label for="views-classic-1">Yaesu</label>
+                            <label for="views-classic-2">Icom</label>
                         </div>
-                        <a class="shot" href="pictures/YWC_Classic.png?v=2">
+                        <a class="shot" href="pictures/YWC_Classic.png?v=2" target="_blank" rel="noopener">
                             <img src="pictures/YWC_Classic.png?v=2"
                                 alt="YWC Classic page with meters, the radio's TFT screen, SDR spectrums for Main and Sub, and a large VFO card per receiver"
+                                loading="lazy">
+                        </a>
+                        <a class="shot" href="pictures/IWC_Classic.png?v=2" target="_blank" rel="noopener">
+                            <img src="pictures/IWC_Classic.png?v=2"
+                                alt="IWC Classic page with meters, a spectrum for VFO A and VFO B side by side, and a large card for each VFO"
                                 loading="lazy">
                         </a>
                     </div>
@@ -385,7 +414,7 @@
                         Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/main/USER_MANUAL.md#20-cw-reader" target="_blank" rel="noopener">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/main/USER_MANUAL.md#18-cw-reader" target="_blank" rel="noopener">IWC</a>
                     </p>
                     <figure>
-                        <a class="shot" href="pictures/CW_Reader.png">
+                        <a class="shot" href="pictures/CW_Reader.png" target="_blank" rel="noopener">
                             <img src="pictures/CW_Reader.png"
                                 alt="The CW Reader window with decoded Morse coloured to mark callsigns, reports and QSO words, a status line, and two tuning aids at the side"
                                 loading="lazy">
@@ -395,7 +424,7 @@
 
                 <div class="block feature">
                     <figure>
-                        <a class="shot" href="pictures/CW_Send.png">
+                        <a class="shot" href="pictures/CW_Send.png" target="_blank" rel="noopener">
                             <img src="pictures/CW_Send.png"
                                 alt="The CW Send window part way through a long line, with the character being keyed highlighted and a tag showing part 2 of 3"
                                 loading="lazy">
@@ -448,7 +477,7 @@
                         </p>
                     </div>
                     <figure>
-                        <a class="shot" href="pictures/ESP32_Paddle_Adapter.jpg">
+                        <a class="shot" href="pictures/ESP32_Paddle_Adapter.jpg" target="_blank" rel="noopener">
                             <img src="pictures/ESP32_Paddle_Adapter.jpg"
                                 alt="An ESP32-S3 board with two USB-C sockets, plugged into a green screw-terminal expansion board, with wires in the terminals and two USB cables connected"
                                 loading="lazy">
@@ -460,15 +489,20 @@
 
                 <div class="block feature narrow-pic">
                     <div class="views">
+                        <input type="radio" name="views-tuner" id="views-tuner-1" checked>
+                        <input type="radio" name="views-tuner" id="views-tuner-2">
                         <div class="view-tabs">
-                            <button aria-pressed="true" data-src="pictures/RTTY_Tuner_YWC.png"
-                                data-alt="The RTTY Tuner window with Mark 2125 and Shift 170, showing a green crossed-ellipse pattern on the tuning scope">Yaesu</button>
-                            <button aria-pressed="false" data-src="pictures/RTTY_Tuner_IWC.png"
-                                data-alt="The IWC RTTY Tuner window on the German weather station DDK9 after Auto: mark 2567 Hz, shift 450 Hz, 50 baud, reversed, with a sharp cross on the tuning scope">Icom, on DDK9</button>
+                            <label for="views-tuner-1">Yaesu</label>
+                            <label for="views-tuner-2">Icom, on DDK9</label>
                         </div>
-                        <a class="shot" href="pictures/RTTY_Tuner_YWC.png">
+                        <a class="shot" href="pictures/RTTY_Tuner_YWC.png" target="_blank" rel="noopener">
                             <img src="pictures/RTTY_Tuner_YWC.png"
                                 alt="The RTTY Tuner window with Mark 2125 and Shift 170, showing a green crossed-ellipse pattern on the tuning scope"
+                                loading="lazy">
+                        </a>
+                        <a class="shot" href="pictures/RTTY_Tuner_IWC.png" target="_blank" rel="noopener">
+                            <img src="pictures/RTTY_Tuner_IWC.png"
+                                alt="The IWC RTTY Tuner window on the German weather station DDK9 after Auto: mark 2567 Hz, shift 450 Hz, 50 baud, reversed, with a sharp cross on the tuning scope"
                                 loading="lazy">
                         </a>
                     </div>
@@ -498,7 +532,7 @@
 
                 <div class="block">
                     <figure>
-                        <a class="shot" href="pictures/RTTY_Contest_DDK9.png">
+                        <a class="shot" href="pictures/RTTY_Contest_DDK9.png" target="_blank" rel="noopener">
                             <img src="pictures/RTTY_Contest_DDK9.png"
                                 alt="The RTTY Contest screen in YWC on the German weather station DDK9: the spectrum over the waterfall with the two tones, the RTTY Tuner showing a sharp cross at Mark 2448, Shift 450, 50 baud, reversed, and decoded text with the station's callsign and frequencies followed by a gale warning for the German Bight"
                                 loading="lazy">
@@ -509,7 +543,7 @@
 
                 <div class="block">
                     <figure>
-                        <a class="shot" href="pictures/RTTY_Decode.png">
+                        <a class="shot" href="pictures/RTTY_Decode.png" target="_blank" rel="noopener">
                             <img src="pictures/RTTY_Decode.png"
                                 alt="The RTTY window decoding contest exchanges such as G4ZWX TU IU2VBP CQ, with Mark 2131, Shift 170, 45.45 baud and a clean cross on the tuning scope"
                                 loading="lazy">
@@ -580,26 +614,46 @@
                 </div>
 
                 <div class="views">
+                    <input type="radio" name="views-ywc" id="views-ywc-1" checked>
+                    <input type="radio" name="views-ywc" id="views-ywc-2">
+                    <input type="radio" name="views-ywc" id="views-ywc-3">
+                    <input type="radio" name="views-ywc" id="views-ywc-4">
+                    <input type="radio" name="views-ywc" id="views-ywc-5">
                     <div class="view-tabs">
-                        <button aria-pressed="true" data-src="pictures/Radio_Both_SDRs.png?v=2"
-                            data-alt="YWC Radio panel on an FTdx101MP, with an SDR spectrum and waterfall for Main on 20 m FT8 and Sub on 40 m FT8 one above the other">Radio panel</button>
-                        <button aria-pressed="false" data-src="pictures/Radio_Night_Console.png?v=2"
-                            data-alt="YWC Radio panel in the Night (red) theme, showing the radio's own TFT screen with Main on 20 m FT8 and Sub on 40 m FT8">Radio panel · Night</button>
-                        <button aria-pressed="false" data-src="pictures/Radio_Silver_Classic.png?v=2"
-                            data-alt="YWC Radio panel in the Silver classic theme, with SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8 one above the other">Radio panel · Silver</button>
-                        <button aria-pressed="false" data-src="pictures/YWC_Classic.png?v=2"
-                            data-alt="YWC Classic page with the Views dropdown, meters, the radio's TFT screen, SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8, and a VFO card per receiver">Classic</button>
-                        <button aria-pressed="false" data-src="pictures/YWC_Experimental.png?v=2"
-                            data-alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, remote audio, an SDR spectrum for each receiver and both VFOs">Experimental</button>
+                        <label for="views-ywc-1">Radio panel</label>
+                        <label for="views-ywc-2">Radio panel · Night</label>
+                        <label for="views-ywc-3">Radio panel · Silver</label>
+                        <label for="views-ywc-4">Classic</label>
+                        <label for="views-ywc-5">Experimental</label>
                     </div>
-                    <a class="shot" href="pictures/Radio_Both_SDRs.png?v=2">
+                    <a class="shot" href="pictures/Radio_Both_SDRs.png?v=2" target="_blank" rel="noopener">
                         <img src="pictures/Radio_Both_SDRs.png?v=2"
                             alt="YWC Radio panel on an FTdx101MP, with an SDR spectrum and waterfall for Main on 20 m FT8 and Sub on 40 m FT8 one above the other">
+                    </a>
+                    <a class="shot" href="pictures/Radio_Night_Console.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/Radio_Night_Console.png?v=2"
+                            alt="YWC Radio panel in the Night (red) theme, showing the radio's own TFT screen with Main on 20 m FT8 and Sub on 40 m FT8"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/Radio_Silver_Classic.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/Radio_Silver_Classic.png?v=2"
+                            alt="YWC Radio panel in the Silver classic theme, with SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8 one above the other"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/YWC_Classic.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/YWC_Classic.png?v=2"
+                            alt="YWC Classic page with the Views dropdown, meters, the radio's TFT screen, SDR spectrums for Main on 20 m FT8 and Sub on 40 m FT8, and a VFO card per receiver"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/YWC_Experimental.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/YWC_Experimental.png?v=2"
+                            alt="YWC Experimental UI: a dark workspace of dockable panels for meters, levels, VFO actions, buttons, remote audio, an SDR spectrum for each receiver and both VFOs"
+                            loading="lazy">
                     </a>
                 </div>
 
                 <figure class="also">
-                    <a class="shot" href="pictures/Radio_Dark_Console.png?v=2">
+                    <a class="shot" href="pictures/Radio_Dark_Console.png?v=2" target="_blank" rel="noopener">
                         <img src="pictures/Radio_Dark_Console.png?v=2"
                             alt="YWC Radio panel on an FTdx101MP, with the radio's own TFT screen, captured from its DVI socket, in place of the spectrum"
                             loading="lazy">
@@ -692,17 +746,27 @@
                 </div>
 
                 <div class="views">
+                    <input type="radio" name="views-iwc" id="views-iwc-1" checked>
+                    <input type="radio" name="views-iwc" id="views-iwc-2">
+                    <input type="radio" name="views-iwc" id="views-iwc-3">
                     <div class="view-tabs">
-                        <button aria-pressed="true" data-src="pictures/IWC_Radio_Panel.png?v=2"
-                            data-alt="IWC Radio panel on an IC-7300 MkII, with VFO A on 20 m and VFO B on 40 m, a CI-V scope for each with DX spots, and the main dial, with the Views dropdown in the header">Radio panel</button>
-                        <button aria-pressed="false" data-src="pictures/IWC_Classic.png?v=2"
-                            data-alt="IWC Classic page with the Views dropdown, meters, a spectrum for VFO A on 20 m and VFO B on 40 m side by side with DX spots, and a card for each VFO">Classic</button>
-                        <button aria-pressed="false" data-src="pictures/IWC_Experimental.png?v=2"
-                            data-alt="IWC Experimental UI: dockable panels for meters, levels, VFO actions and buttons, a spectrum for VFO A on 20 m and VFO B on 40 m side by side with DX spots, and a card for each VFO">Experimental</button>
+                        <label for="views-iwc-1">Radio panel</label>
+                        <label for="views-iwc-2">Classic</label>
+                        <label for="views-iwc-3">Experimental</label>
                     </div>
-                    <a class="shot" href="pictures/IWC_Radio_Panel.png?v=2">
+                    <a class="shot" href="pictures/IWC_Radio_Panel.png?v=2" target="_blank" rel="noopener">
                         <img src="pictures/IWC_Radio_Panel.png?v=2"
                             alt="IWC Radio panel on an IC-7300 MkII, with VFO A on 20 m and VFO B on 40 m, a CI-V scope for each with DX spots, and the main dial, with the Views dropdown in the header"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/IWC_Classic.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/IWC_Classic.png?v=2"
+                            alt="IWC Classic page with the Views dropdown, meters, a spectrum for VFO A on 20 m and VFO B on 40 m side by side with DX spots, and a card for each VFO"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/IWC_Experimental.png?v=2" target="_blank" rel="noopener">
+                        <img src="pictures/IWC_Experimental.png?v=2"
+                            alt="IWC Experimental UI: dockable panels for meters, levels, VFO actions and buttons, a spectrum for VFO A on 20 m and VFO B on 40 m side by side with DX spots, and a card for each VFO"
                             loading="lazy">
                     </a>
                 </div>
@@ -787,24 +851,6 @@
             </span>
         </div>
     </footer>
-
-    <script>
-        // Screenshot switcher: each button swaps the picture below it.
-        document.querySelectorAll(".views").forEach(function (views) {
-            var link = views.querySelector(".shot");
-            var img = link.querySelector("img");
-            var buttons = views.querySelectorAll(".view-tabs button");
-            var show = function (btn) {
-                buttons.forEach(function (b) { b.setAttribute("aria-pressed", b === btn); });
-                img.src = btn.dataset.src;
-                img.alt = btn.dataset.alt;
-                link.href = btn.dataset.src;
-            };
-            buttons.forEach(function (btn) {
-                btn.addEventListener("click", function () { show(btn); });
-            });
-        });
-    </script>
 
 </body>
 
