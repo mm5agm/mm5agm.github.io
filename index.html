@@ -326,6 +326,7 @@
                 <a href="#both">In both</a>
                 <a href="#ywc">Yaesu</a>
                 <a href="#iwc">Icom</a>
+                <a href="#acc">ACC scope</a>
                 <a href="#about">About</a>
             </nav>
         </div>
@@ -345,6 +346,7 @@
                 <div class="buttons">
                     <a class="btn primary" href="#ywc">Yaesu Web Control</a>
                     <a class="btn primary" href="#iwc">Icom Web Control</a>
+                    <a class="btn" href="#acc">New: ACC Spectrum</a>
                 </div>
             </div>
         </section>
@@ -816,12 +818,111 @@
             </div>
         </section>
 
+        <!-- ---------- Yaesu ACC Spectrum ---------- -->
+        <section class="product" id="acc">
+            <div class="wrap">
+                <div class="product-head">
+                    <h2>Yaesu ACC Spectrum</h2>
+                    <span class="tag">New</span>
+                </div>
+                <p class="lead">
+                    The FTdx101 sends its own scope data out of the ACC socket on the back. With an
+                    ESP32-S3 board, a cable and six resistors, I read it on the PC over USB: the Main and
+                    Sub spectrum, 25 times a second, with the frequencies, the span and the audio scope,
+                    all from the radio's own data. No SDR, no IF tap and nothing inside the radio.
+                    It's receive-only: nothing here keys the radio.
+                </p>
+                <div class="badges">
+                    <img src="https://img.shields.io/github/v/release/mm5agm/Yaesu_ACC_Spectrum?style=flat-square&label=Latest&display_name=release"
+                        alt="Latest firmware release">
+                    <img src="https://img.shields.io/badge/Licence-GPL--3.0-blue?style=flat-square" alt="GPL-3.0">
+                    <img src="https://img.shields.io/badge/Library-LGPL--3.0-blue?style=flat-square" alt="Library LGPL-3.0">
+                </div>
+
+                <div class="views">
+                    <input type="radio" name="views-acc" id="views-acc-1" checked>
+                    <input type="radio" name="views-acc" id="views-acc-2">
+                    <input type="radio" name="views-acc" id="views-acc-3">
+                    <div class="view-tabs">
+                        <label for="views-acc-1">Waterfall</label>
+                        <label for="views-acc-2">3DSS</label>
+                        <label for="views-acc-3">Wiring</label>
+                    </div>
+                    <a class="shot" href="pictures/ACC_Waterfall.png?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/ACC_Waterfall.png?v=1"
+                            alt="Live from the FTdx101MP's ACC socket: Main on 14,074 kHz and Sub on 7,074 kHz, each a trace above a waterfall, with the FT8 signals on each band"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/ACC_3DSS.png?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/ACC_3DSS.png?v=1"
+                            alt="The same two bands in a 3DSS view: the last 40 traces stacked in perspective, the FT8 signals standing up as a ridge on each"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/ACC_Wiring.jpg?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/ACC_Wiring.jpg?v=1"
+                            alt="The ESP32-S3 on a screw-terminal board, with each ACC pin's wire and its 470 ohm series resistor labelled"
+                            loading="lazy">
+                    </a>
+                </div>
+
+                <div class="grid">
+                    <div class="card">
+                        <h3>Main and Sub, from the radio</h3>
+                        <p>850 points a row for each receiver, with the VFO, the span and Center, Cursor or
+                            Fix all in the radio's own data, so there's no CAT polling and Cursor and Fix
+                            work too.</p>
+                    </div>
+                    <div class="card">
+                        <h3>My own firmware</h3>
+                        <p>Written from scratch for the ESP32-S3, one file to flash. It also counts the
+                            signals on each wire, to check the wiring.</p>
+                    </div>
+                    <div class="card">
+                        <h3>A library for other programs</h3>
+                        <p>A .NET library under the LGPL, so loggers and other programs can show the
+                            spectrum too, and the data format is written down for any language.
+                            Yaesu Web Control will use it next.</p>
+                    </div>
+                </div>
+
+                <div class="specs">
+                    <div>
+                        <h4>Tested on</h4>
+                        <div class="chips">
+                            <span class="chip">FTdx101MP</span>
+                        </div>
+                        <p class="note">The FTdx101D should be the same, but I haven't been able to try one.</p>
+                    </div>
+                    <div>
+                        <h4>You need</h4>
+                        <div class="chips">
+                            <span class="chip">ESP32-S3 board</span>
+                            <span class="chip">13-pin mini-DIN cable</span>
+                            <span class="chip">Six 470 ohm resistors</span>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="note" style="margin-bottom:20px">
+                    <strong>This is an experiment, and you wire your radio at your own risk.</strong>
+                    One ACC pin carries 13.8 V and two key the transmitter, so follow the bench notes in the
+                    project before you plug anything in.
+                </p>
+
+                <div class="buttons" style="justify-content:flex-start">
+                    <a class="btn primary" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum" target="_blank" rel="noopener">The project on GitHub</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/releases/latest" target="_blank" rel="noopener">Firmware</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/blob/main/library/README.md" target="_blank" rel="noopener">The library</a>
+                </div>
+            </div>
+        </section>
+
         <!-- ---------- About ---------- -->
         <section class="about" id="about">
             <div class="wrap">
                 <h2>About</h2>
                 <p>
-                    I'm Colin, MM5AGM, in Scotland. I write YWC and IWC for my own station, an FTdx101MP
+                    I'm Colin, MM5AGM, in Scotland. I write YWC, IWC and ACC Spectrum for my own station, an FTdx101MP
                     with an SDRplay for the spectrum and an IC-7300 MkII on the bench, and share them so
                     other operators can use them too.
                 </p>
