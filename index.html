@@ -602,7 +602,8 @@
                 </div>
                 <p class="lead">
                     Browser-based control for Yaesu HF transceivers. As well as everything
-                    <a href="#both">in both programs</a>, YWC has an SDR spectrum for each receiver, the
+                    <a href="#both">in both programs</a>, YWC has a spectrum for each receiver, from an
+                    SDR or, on an FTdx101, <a href="#acc">the radio's own scope</a>, the
                     radio's own screen in the browser, and audio to and from the browser. As well as the
                     Windows installer, there are macOS, Linux and Docker versions of YWC, which also run
                     on a Raspberry Pi.
@@ -666,8 +667,11 @@
                 <div class="grid">
                     <div class="card">
                         <h3>SDR spectrum and waterfall</h3>
-                        <p>Live panadapter and waterfall from an SDRplay or other SDR, or the radio's own scope.
-                            Show Main, Sub, or both receivers at once.</p>
+                        <p>Live panadapter and waterfall from an SDRplay or other SDR, 25 frames a second
+                            at every span from 1 kHz to 1 MHz. Show Main, Sub, or both receivers at once.
+                            On an FTdx101 the radio's own scope can feed them instead, from
+                            <a href="#acc">a small board on its ACC socket</a>, with Refine to settle the
+                            noise floor. New in v2.5.5.</p>
                     </div>
                     <div class="card">
                         <h3>The radio's screen in your browser</h3>
@@ -908,7 +912,7 @@
                     </div>
                     <div class="card">
                         <h3>In Yaesu Web Control, and other programs</h3>
-                        <p>YWC shows it in its spectrum panels in the v2.5.5 test builds, with Refine
+                        <p>YWC v2.5.5 shows it in its spectrum panels, with Refine
                             and a warning when the radio's scope LEVEL is too low. The .NET library is
                             on <a href="https://www.nuget.org/packages/YaesuAccScope" target="_blank" rel="noopener">nuget.org</a>
                             under the LGPL, and the data format is written down for any language.</p>
