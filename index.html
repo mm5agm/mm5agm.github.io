@@ -827,14 +827,19 @@
                 </div>
                 <p class="lead">
                     The FTdx101 sends its own scope data out of the ACC socket on the back. With an
-                    ESP32-S3 board, a cable and six resistors, I read it on the PC over USB: the Main and
+                    ESP32-S3 board, a cable, six resistors and a link wire, I read it on the PC over USB: the Main and
                     Sub spectrum, 25 times a second, with the frequencies, the span and the audio scope,
                     all from the radio's own data. No SDR, no IF tap and nothing inside the radio.
                     It's receive-only: nothing here keys the radio.
                 </p>
+                <p class="note">
+                    Most of this project was written by Claude, Anthropic's AI model, working in Claude Code.
+                    I gave the guidance and suggestions, did the hands-on testing at the bench, and took the
+                    oscilloscope traces.
+                </p>
                 <div class="badges">
                     <img src="https://img.shields.io/github/v/release/mm5agm/Yaesu_ACC_Spectrum?style=flat-square&label=Latest&display_name=release"
-                        alt="Latest firmware release">
+                        alt="Latest release of ACC Spectrum Viewer">
                     <img src="https://img.shields.io/badge/Licence-GPL--3.0-blue?style=flat-square" alt="GPL-3.0">
                     <img src="https://img.shields.io/badge/Library-LGPL--3.0-blue?style=flat-square" alt="Library LGPL-3.0">
                 </div>
@@ -878,15 +883,35 @@
                             work too.</p>
                     </div>
                     <div class="card">
+                        <h3>A viewer that checks your wiring</h3>
+                        <p>ACC Spectrum Viewer for Windows finds the board, shows Main and Sub with a
+                            3DSS view, and checks the wiring wire by wire. ACC Firmware Flasher comes
+                            with it, so the firmware goes on with nothing else to install.</p>
+                    </div>
+                    <div class="card">
                         <h3>My own firmware</h3>
                         <p>Written from scratch for the ESP32-S3, one file to flash. It also counts the
                             signals on each wire, to check the wiring.</p>
                     </div>
                     <div class="card">
-                        <h3>A library for other programs</h3>
-                        <p>A .NET library under the LGPL, so loggers and other programs can show the
-                            spectrum too, and the data format is written down for any language.
-                            Yaesu Web Control will use it next.</p>
+                        <h3>Every line on an oscilloscope</h3>
+                        <p>Each line of the ACC socket was measured before anything was connected, with
+                            and without the ESP32, and every trace is published. All of them are 3.3 V
+                            logic on the FTdx101MP.</p>
+                    </div>
+                    <div class="card">
+                        <h3>As good as an SDR, at some spans</h3>
+                        <p>Against two SDRplay receivers on the radio's IF outputs, the ACC scope with
+                            Refine showed more weak signals at 1&ndash;2 kHz and from 200 kHz to 1 MHz,
+                            the same at 5&ndash;20 kHz, and fewer at 50&ndash;100 kHz. The SDR follows
+                            changes faster and goes wider than 1 MHz.</p>
+                    </div>
+                    <div class="card">
+                        <h3>In Yaesu Web Control, and other programs</h3>
+                        <p>YWC shows it in its spectrum panels in the v2.5.5 test builds, with Refine
+                            and a warning when the radio's scope LEVEL is too low. The .NET library is
+                            on <a href="https://www.nuget.org/packages/YaesuAccScope" target="_blank" rel="noopener">nuget.org</a>
+                            under the LGPL, and the data format is written down for any language.</p>
                     </div>
                 </div>
 
@@ -904,6 +929,7 @@
                             <span class="chip">ESP32-S3 board</span>
                             <span class="chip">13-pin mini-DIN cable</span>
                             <span class="chip">Six 470 ohm resistors</span>
+                            <span class="chip">A short link wire</span>
                         </div>
                     </div>
                 </div>
@@ -916,7 +942,9 @@
 
                 <div class="buttons" style="justify-content:flex-start">
                     <a class="btn primary" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum" target="_blank" rel="noopener">The project on GitHub</a>
-                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/releases/latest" target="_blank" rel="noopener">Firmware</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/releases/latest" target="_blank" rel="noopener">Viewer and firmware</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/blob/main/docs/setup-guide.md" target="_blank" rel="noopener">Setup guide</a>
+                    <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/blob/main/docs/best-picture.md" target="_blank" rel="noopener">Getting the best picture</a>
                     <a class="btn" href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/blob/main/library/README.md" target="_blank" rel="noopener">The library</a>
                 </div>
             </div>
