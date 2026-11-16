@@ -852,10 +852,12 @@
                     <input type="radio" name="views-acc" id="views-acc-1" checked>
                     <input type="radio" name="views-acc" id="views-acc-2">
                     <input type="radio" name="views-acc" id="views-acc-3">
+                    <input type="radio" name="views-acc" id="views-acc-4">
                     <div class="view-tabs">
                         <label for="views-acc-1">Waterfall</label>
                         <label for="views-acc-2">3DSS</label>
-                        <label for="views-acc-3">Wiring</label>
+                        <label for="views-acc-3">Audio</label>
+                        <label for="views-acc-4">Wiring</label>
                     </div>
                     <a class="shot" href="pictures/ACC_Waterfall.png?v=1" target="_blank" rel="noopener">
                         <img src="pictures/ACC_Waterfall.png?v=1"
@@ -865,6 +867,11 @@
                     <a class="shot" href="pictures/ACC_3DSS.png?v=1" target="_blank" rel="noopener">
                         <img src="pictures/ACC_3DSS.png?v=1"
                             alt="The same two bands in a 3DSS view: the last 40 traces stacked in perspective, the FT8 signals standing up as a ridge on each"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/ACC_Audio.png?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/ACC_Audio.png?v=1"
+                            alt="The viewer with the audio scopes beside the scopes: Main on 14,074 kHz and Sub on 18,100 kHz FT8, each AF-FFT from 0 to 4 kHz above an audio waterfall, where the FT8 stations are vertical stripes and the gaps between cycles are dark lines across"
                             loading="lazy">
                     </a>
                     <a class="shot" href="pictures/ACC_Wiring.jpg?v=1" target="_blank" rel="noopener">
@@ -891,6 +898,13 @@
                         <p>ACC Spectrum Viewer for Windows finds the board, shows Main and Sub with a
                             3DSS view, and checks the wiring wire by wire. ACC Firmware Flasher comes
                             with it, so the firmware goes on with nothing else to install.</p>
+                    </div>
+                    <div class="card">
+                        <h3>The audio scope, as a waterfall</h3>
+                        <p>Each receiver's AF-FFT, 0 to 4 kHz, comes from the ACC socket too, with an
+                            audio waterfall under it that holds a whole FT8 cycle: every station is a
+                            stripe. The radio's oscilloscope is a click away. In the viewer's 1.1.0
+                            pre-release, and in YWC's MULTI group in its next release.</p>
                     </div>
                     <div class="card">
                         <h3>My own firmware</h3>
