@@ -924,6 +924,16 @@
                     nuget.org, in viewer 1.1.0-pre4, and in YWC from
                     <a href="https://github.com/mm5agm/Yaesu_Web_Control/releases/tag/v2.5.6-pre17" target="_blank" rel="noopener">v2.5.6-pre17</a>.
                 </p>
+                <p>
+                    <strong>New: the scope on a web page, over Wi-Fi.</strong> With
+                    <a href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/releases/tag/firmware-v3.0.7" target="_blank" rel="noopener">firmware 3.0.7</a>,
+                    the board joins your home network, and any browser on it can show the scope, the
+                    waterfall and the audio scope for Main and Sub: a phone, a tablet or another PC, with
+                    nothing to install. USB works as before, at the same time. The Wi-Fi firmware is
+                    Eugene's work too, and ACC Firmware Flasher in
+                    <a href="https://github.com/mm5agm/Yaesu_ACC_Spectrum/releases/tag/viewer-v1.1.0-pre5" target="_blank" rel="noopener">viewer 1.1.0-pre5</a>
+                    comes with it.
+                </p>
                 <p class="note">
                     Most of this project was written by Claude, Anthropic's AI model, working in Claude Code.
                     I gave the guidance and suggestions, did the hands-on testing at the bench, and took the
@@ -941,11 +951,13 @@
                     <input type="radio" name="views-acc" id="views-acc-2">
                     <input type="radio" name="views-acc" id="views-acc-3">
                     <input type="radio" name="views-acc" id="views-acc-4">
+                    <input type="radio" name="views-acc" id="views-acc-5">
                     <div class="view-tabs">
                         <label for="views-acc-1">Waterfall</label>
                         <label for="views-acc-2">3DSS</label>
                         <label for="views-acc-3">Audio</label>
                         <label for="views-acc-4">Wiring</label>
+                        <label for="views-acc-5">Wi-Fi</label>
                     </div>
                     <a class="shot" href="pictures/ACC_Waterfall.png?v=1" target="_blank" rel="noopener">
                         <img src="pictures/ACC_Waterfall.png?v=1"
@@ -965,6 +977,11 @@
                     <a class="shot" href="pictures/ACC_Wiring.jpg?v=1" target="_blank" rel="noopener">
                         <img src="pictures/ACC_Wiring.jpg?v=1"
                             alt="The ESP32-S3 on a screw-terminal board, with each ACC pin's wire and its 470 ohm series resistor labelled"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/ACC_WiFi.png?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/ACC_WiFi.png?v=1"
+                            alt="The board's own web page in a browser over Wi-Fi, at 26 frames a second from the FTdx101: Main on 14,099 kHz and Sub on 14,074 kHz FT8, each a trace above a waterfall, with each receiver's audio scope beside it"
                             loading="lazy">
                     </a>
                 </div>
@@ -997,7 +1014,8 @@
                     <div class="card">
                         <h3>My own firmware</h3>
                         <p>Written from scratch for the ESP32-S3, one file to flash. It also counts the
-                            signals on each wire, to check the wiring.</p>
+                            signals on each wire, to check the wiring. From version 3 it serves the
+                            scope over Wi-Fi as well, thanks to Eugene YO9VA.</p>
                     </div>
                     <div class="card">
                         <h3>Every line on an oscilloscope</h3>
