@@ -183,14 +183,16 @@
         .views > input:nth-of-type(3):checked ~ .shot:nth-of-type(3),
         .views > input:nth-of-type(4):checked ~ .shot:nth-of-type(4),
         .views > input:nth-of-type(5):checked ~ .shot:nth-of-type(5),
-        .views > input:nth-of-type(6):checked ~ .shot:nth-of-type(6) { display: block; }
+        .views > input:nth-of-type(6):checked ~ .shot:nth-of-type(6),
+        .views > input:nth-of-type(7):checked ~ .shot:nth-of-type(7) { display: block; }
 
         .views > input:nth-of-type(1):checked ~ .view-tabs label:nth-of-type(1),
         .views > input:nth-of-type(2):checked ~ .view-tabs label:nth-of-type(2),
         .views > input:nth-of-type(3):checked ~ .view-tabs label:nth-of-type(3),
         .views > input:nth-of-type(4):checked ~ .view-tabs label:nth-of-type(4),
         .views > input:nth-of-type(5):checked ~ .view-tabs label:nth-of-type(5),
-        .views > input:nth-of-type(6):checked ~ .view-tabs label:nth-of-type(6) {
+        .views > input:nth-of-type(6):checked ~ .view-tabs label:nth-of-type(6),
+        .views > input:nth-of-type(7):checked ~ .view-tabs label:nth-of-type(7) {
             color: #111;
             background: var(--amber);
             border-color: var(--amber);
@@ -201,7 +203,8 @@
         .views > input:nth-of-type(3):focus-visible ~ .view-tabs label:nth-of-type(3),
         .views > input:nth-of-type(4):focus-visible ~ .view-tabs label:nth-of-type(4),
         .views > input:nth-of-type(5):focus-visible ~ .view-tabs label:nth-of-type(5),
-        .views > input:nth-of-type(6):focus-visible ~ .view-tabs label:nth-of-type(6) {
+        .views > input:nth-of-type(6):focus-visible ~ .view-tabs label:nth-of-type(6),
+        .views > input:nth-of-type(7):focus-visible ~ .view-tabs label:nth-of-type(7) {
             outline: 2px solid var(--amber);
             outline-offset: 2px;
         }
@@ -590,7 +593,10 @@
                     <div class="card">
                         <h3>Works with your logger</h3>
                         <p>Integrates with WSJT-X, Log4OM, JTAlert and GridTracker, with a built-in rigctld
-                            bridge so they can share the radio.</p>
+                            bridge so they can share the radio. Log4OM's CAT connection through the bridge now goes
+                            green and stays green, in YWC from the
+                            <a href="https://github.com/mm5agm/Yaesu_Web_Control/releases/tag/v2.5.6-pre19" target="_blank" rel="noopener">v2.5.6-pre19</a>
+                            pre-release. IWC gets the same fix next.</p>
                     </div>
                 </div>
             </div>
@@ -626,6 +632,7 @@
                     <input type="radio" name="views-ywc" id="views-ywc-4">
                     <input type="radio" name="views-ywc" id="views-ywc-5">
                     <input type="radio" name="views-ywc" id="views-ywc-6">
+                    <input type="radio" name="views-ywc" id="views-ywc-7">
                     <div class="view-tabs">
                         <label for="views-ywc-1">Radio panel</label>
                         <label for="views-ywc-2">Radio panel · Night</label>
@@ -633,6 +640,7 @@
                         <label for="views-ywc-4">Classic</label>
                         <label for="views-ywc-5">Experimental</label>
                         <label for="views-ywc-6">Audio waterfall</label>
+                        <label for="views-ywc-7">Log4OM</label>
                     </div>
                     <a class="shot" href="pictures/Radio_Both_SDRs.png?v=2" target="_blank" rel="noopener">
                         <img src="pictures/Radio_Both_SDRs.png?v=2"
@@ -661,6 +669,11 @@
                     <a class="shot" href="pictures/YWC_Audio_Waterfall.png?v=1" target="_blank" rel="noopener">
                         <img src="pictures/YWC_Audio_Waterfall.png?v=1"
                             alt="YWC Audio Waterfall window on 20 m FT8: the radio's USB audio from 0 to 4 kHz, a spectrum above a waterfall where each FT8 station is a vertical stripe, with marks above the waterfall that guess the mode, FT8 or CW, and a line for each guess under it"
+                            loading="lazy">
+                    </a>
+                    <a class="shot" href="pictures/YWC_Log4OM_CAT.png?v=1" target="_blank" rel="noopener">
+                        <img src="pictures/YWC_Log4OM_CAT.png?v=1"
+                            alt="Log4OM 2 connected to YWC through its rigctld bridge: CAT is lit green in the bottom bar, and the frequency displays show 14.074 MHz and 10.100 MHz from the radio"
                             loading="lazy">
                     </a>
                 </div>
