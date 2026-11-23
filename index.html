@@ -776,6 +776,28 @@
                     </div>
                 </div>
 
+                <div class="block">
+                    <h3>N1MM Logger+ shares the radio</h3>
+                    <p>
+                        N1MM connects to YWC over a TCP CAT port as if YWC were the radio, so there's no virtual
+                        COM port pair or port splitter. Turn it on in Settings, N1MM Logger+, then in N1MM's
+                        Configure Ports set the port to TCP and the address to 127.0.0.1:4535. N1MM can then do
+                        everything it could with the radio on its own COM port, and if N1MM's connection drops
+                        while it has the radio keyed, YWC sends receive. N1MM can run on another PC too. It's
+                        new and still being tested, in YWC from the
+                        <a href="https://github.com/mm5agm/Yaesu_Web_Control/releases/tag/v2.5.6-pre21" target="_blank" rel="noopener">v2.5.6-pre21</a>
+                        pre-release. It isn't offered for the FT-847, FT-817, FT-818, FT-857 and FT-897.
+                    </p>
+                    <figure>
+                        <a class="shot" href="pictures/N1MM_CAT_Port.png?v=1" target="_blank" rel="noopener">
+                            <img src="pictures/N1MM_CAT_Port.png?v=1"
+                                alt="The N1MM Logger+ section of YWC's Settings page: how to set up N1MM's Configure Ports, a switch to turn on the CAT port for N1MM, the port number 4535, and a switch to allow N1MM on another PC"
+                                loading="lazy">
+                        </a>
+                        <figcaption class="note">Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/develop/USER_MANUAL.md#95-n1mm-logger" target="_blank" rel="noopener">N1MM Logger+</a></figcaption>
+                    </figure>
+                </div>
+
                 <div class="specs">
                     <div>
                         <h4>Supported radios</h4>
