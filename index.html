@@ -608,6 +608,33 @@
                     </figure>
                 </div>
 
+                <div class="block">
+                    <h3>Radio menu file: the front panel too</h3>
+                    <p>
+                        Save radio menu to file (Settings) now saves the front panel as well as the radio's
+                        menu: RF GAIN, AGC, preamp, ATT, NB, NR, the notches, MIC GAIN, compressor, power,
+                        monitor, VOX and the rest. Everything except the volume and the frequency. Settings
+                        the radio keeps per band are saved for the band you're on, and those it keeps per
+                        mode are saved for each mode. When you load a file, settings that change how the
+                        radio transmits are marked TX and start unticked, and a setting saved for another
+                        band is skipped with a note. When the program starts, it asks you to save if a
+                        front panel setting has changed since your last file. For the FTdx101MP and FTdx101D
+                        in YWC from the
+                        <a href="https://github.com/mm5agm/Yaesu_Web_Control/releases/tag/v2.5.6-pre44" target="_blank" rel="noopener">v2.5.6-pre44</a>
+                        pre-release, and for the IC-7300MK2 in IWC from the
+                        <a href="https://github.com/mm5agm/Icom_Web_Control/releases/tag/v1.7.0-pre30" target="_blank" rel="noopener">v1.7.0-pre30</a>
+                        pre-release.
+                    </p>
+                    <figure>
+                        <a class="shot" href="pictures/Radio_Menu_Front_Panel.png?v=1" target="_blank" rel="noopener">
+                            <img src="pictures/Radio_Menu_Front_Panel.png?v=1"
+                                alt="Loading a radio menu file in YWC: 4 to change, 386 already the same. RF GAIN 247 to 200, NB (20m) OFF to ON and AGC (USB, 20m) FAST to MID are ticked; MIC GAIN (USB) 50 to 40 is marked TX and unticked; ATT (40m) is skipped because the radio is on 20m"
+                                loading="lazy">
+                        </a>
+                        <figcaption class="note">Made with an example file; nothing was sent to the radio. Manual: <a href="https://github.com/mm5agm/Yaesu_Web_Control/blob/develop/USER_MANUAL.md#radio-menu" target="_blank" rel="noopener">YWC</a> | <a href="https://github.com/mm5agm/Icom_Web_Control/blob/develop/USER_MANUAL.md#radio-menu" target="_blank" rel="noopener">IWC</a></figcaption>
+                    </figure>
+                </div>
+
                 <div class="grid">
                     <div class="card">
                         <h3>DX spots and watch list</h3>
@@ -1028,7 +1055,7 @@
                     </div>
                     <div class="card">
                         <h3>Back up the radio's menu</h3>
-                        <p>On the MkII, save the radio's own menu settings to a file and put them back.</p>
+                        <p>On the MkII, save the radio's own menu and front panel settings to a file and put them back.</p>
                     </div>
                     <div class="card">
                         <h3>Choose the transmit audio</h3>
